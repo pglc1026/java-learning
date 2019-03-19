@@ -1,18 +1,18 @@
-package jl.pc.common;
+package jl.producerconsumer.common;
 
 /**
- * AbstractProducer
+ * AbstractConsumer
  *
  * @author liuchang39
  * @date 2019/3/18
  */
-public abstract class AbstractProducer implements Producer, Runnable {
+public abstract class AbstractConsumer implements Consumer, Runnable {
 
     @Override
     public void run() {
         while (true) {
             try {
-                produce();
+                consume();
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 break;

@@ -1,4 +1,4 @@
-package jl.pc.common;
+package jl.producerconsumer.common;
 
 /**
  * Consumer

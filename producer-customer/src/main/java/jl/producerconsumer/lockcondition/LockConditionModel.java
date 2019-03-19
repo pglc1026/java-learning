@@ -1,31 +1,36 @@
-package jl.pc.waitnotify;
+package jl.producerconsumer.lockcondition;
 
-import jl.pc.common.AbstractConsumer;
-import jl.pc.common.AbstractProducer;
-import jl.pc.common.Model;
-import jl.pc.common.Task;
+import jl.producerconsumer.common.AbstractConsumer;
+import jl.producerconsumer.common.AbstractProducer;
+import jl.producerconsumer.common.Model;
+import jl.producerconsumer.common.Task;
 
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * WatiNotifyModel
+ * LockConditionMode
  *
  * @author liuchang39
  * @date 2019/3/18
  */
-public class WatiNotifyModel implements Model {
+public class LockConditionModel implements Model {
 
-    private final int cap;
+    private final Lock BUFFER_LOCK = new ReentrantLock();
 
-    private final Object BUFFER_LOCK = new Object();
+    private final Condition BUFFER_COND = BUFFER_LOCK.newCondition();
 
     private final Queue<Task> buffer = new LinkedList<>();
 
+    private final int cap;
+
     private final AtomicInteger increTaskNo = new AtomicInteger(0);
 
-    public WatiNotifyModel(int cap) {
+    public LockConditionModel(int cap) {
         this.cap = cap;
     }
 
@@ -43,16 +48,19 @@ public class WatiNotifyModel implements Model {
 
         @Override
         public void consume() throws InterruptedException {
-            synchronized (BUFFER_LOCK) {
+            BUFFER_LOCK.lockInterruptibly();
+            try {
                 while (buffer.size() == 0) {
-                    BUFFER_LOCK.wait();
+                    BUFFER_COND.await();
                 }
                 Task task = buffer.poll();
                 assert task != null;
-                // 固定时间范围的消费，模拟相对稳定的服务器处理过程
+                // 固定时间范围消费，模拟相对稳定的服务器处理过程
                 Thread.sleep(500 + (long) (Math.random() * 500));
                 System.out.println("consume: " + task.getNo());
-                BUFFER_LOCK.notifyAll();
+                BUFFER_COND.signalAll();
+            } finally {
+                BUFFER_LOCK.unlock();
             }
         }
     }
@@ -63,20 +71,23 @@ public class WatiNotifyModel implements Model {
         public void produce() throws InterruptedException {
             // 不定期生产，模拟随机的用户请求
             Thread.sleep((long) (Math.random() * 1000));
-            synchronized (BUFFER_LOCK) {
+            BUFFER_LOCK.lockInterruptibly();
+            try {
                 while (buffer.size() == cap) {
-                    BUFFER_LOCK.wait();
+                    BUFFER_COND.await();
                 }
                 Task task = new Task(increTaskNo.getAndIncrement());
                 buffer.offer(task);
                 System.out.println("produce: " + task.getNo());
-                BUFFER_LOCK.notifyAll();
+                BUFFER_COND.signalAll();
+            } finally {
+                BUFFER_LOCK.unlock();
             }
         }
     }
 
     public static void main(String[] args) {
-        Model model = new WatiNotifyModel(3);
+        Model model = new LockConditionModel(3);
         for (int i = 0; i < 2; i++) {
             new Thread(model.newRunnableConsumer()).start();
         }
@@ -84,4 +95,5 @@ public class WatiNotifyModel implements Model {
             new Thread(model.newRunnableProducer()).start();
         }
     }
+
 }

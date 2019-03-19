@@ -1,9 +1,9 @@
-package jl.pc.blockingqueue;
+package jl.producerconsumer.blockingqueue;
 
-import jl.pc.common.AbstractConsumer;
-import jl.pc.common.AbstractProducer;
-import jl.pc.common.Model;
-import jl.pc.common.Task;
+import jl.producerconsumer.common.AbstractConsumer;
+import jl.producerconsumer.common.AbstractProducer;
+import jl.producerconsumer.common.Model;
+import jl.producerconsumer.common.Task;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
