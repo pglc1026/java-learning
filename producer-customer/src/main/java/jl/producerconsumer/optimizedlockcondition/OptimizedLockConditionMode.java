@@ -152,13 +152,21 @@ public class OptimizedLockConditionMode implements Model {
         }
     }
 
+//    public static void main(String[] args) {
+//        Model model = new OptimizedLockConditionMode(3);
+//        for (int i = 0; i < 2; i++) {
+//            new Thread(model.newRunnableConsumer()).start();
+//        }
+//        for (int i = 0; i < 2; i++) {
+//            new Thread(model.newRunnableProducer()).start();
+//        }
+//    }
+
     public static void main(String[] args) {
-        Model model = new OptimizedLockConditionMode(3);
-        for (int i = 0; i < 2; i++) {
-            new Thread(model.newRunnableConsumer()).start();
-        }
-        for (int i = 0; i < 2; i++) {
-            new Thread(model.newRunnableProducer()).start();
-        }
+        byte a = (byte) -128;
+        System.out.println(a);
+        System.out.println(Integer.toBinaryString(a));
+        System.out.println(Integer.toBinaryString(a & 0xff));
+        System.out.println((byte) (a & 0xff));
     }
 }
