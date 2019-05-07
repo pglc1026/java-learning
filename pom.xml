@@ -10,6 +10,7 @@
     <modules>
         <module>producer-customer</module>
         <module>reference</module>
+        <module>jvm</module>
     </modules>
     <packaging>pom</packaging>
 
