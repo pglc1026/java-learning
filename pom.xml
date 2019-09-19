@@ -13,8 +13,20 @@
         <module>jvm</module>
         <module>zookeeper</module>
         <module>algorithm</module>
+        <module>jdk8-learning</module>
     </modules>
     <packaging>pom</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>28.1-jre</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
