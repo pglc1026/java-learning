@@ -6,6 +6,10 @@ import java.util.concurrent.ExecutionException;
 /**
  * CompletableFutureTest2
  * 主动触发计算
+ *
+ * public boolean complete(T  value)
+ * public boolean completeExceptionally(Throwable ex)
+ *
  * @author Liu Chang
  * @date 2019/9/19
  */

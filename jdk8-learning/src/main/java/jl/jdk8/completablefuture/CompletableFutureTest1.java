@@ -11,6 +11,18 @@ import java.util.concurrent.TimeUnit;
  * CompletableFutureTest
  * 创建、同步获取结果
  *
+ * 创建CompletableFuture的方式
+ * public static CompletableFuture<Void> runAsync(Runnable runnable)
+ * public static CompletableFuture<Void>   runAsync(Runnable runnable, Executor executor)
+ * public static <U> CompletableFuture<U>  supplyAsync(Supplier<U> supplier)
+ * public static <U> CompletableFuture<U>  supplyAsync(Supplier<U> supplier, Executor executor)
+ *
+ * 同步获取结果
+ * public T    get()
+ * public T    get(long timeout, TimeUnit unit)
+ * public T    getNow(T valueIfAbsent)
+ * public T    join()
+
  * @author Liu Chang
  * @date 2019/9/19
  */
@@ -20,23 +32,11 @@ public class CompletableFutureTest1 {
 
     public static void main(String[] args) throws Exception {
 
-        // 创建CompletableFuture的方式
-//        public static CompletableFuture<Void> runAsync(Runnable runnable)
-//        public static CompletableFuture<Void>   runAsync(Runnable runnable, Executor executor)
-//        public static <U> CompletableFuture<U>  supplyAsync(Supplier<U> supplier)
-//        public static <U> CompletableFuture<U>  supplyAsync(Supplier<U> supplier, Executor executor)
-
         try {
             CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> "hello world " + Thread.currentThread().getName(), executor);
 
 //            Thread.sleep(1000);
 
-            // 获取结果的方式
-            //同步获取结果
-//            public T    get()
-//            public T    get(long timeout, TimeUnit unit)
-//            public T    getNow(T valueIfAbsent)
-//            public T    join()
             System.out.println(future.getNow("hello java"));
 
             // 阻塞的获取结果
