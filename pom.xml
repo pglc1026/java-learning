@@ -13,7 +13,8 @@
         <module>jvm</module>
         <module>zookeeper</module>
         <module>algorithm</module>
-        <module>jdk8-learning</module>
+        <module>jdk8-completable-future</module>
+        <module>reactive-programming</module>
     </modules>
     <packaging>pom</packaging>
 
