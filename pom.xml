@@ -15,6 +15,9 @@
         <module>algorithm</module>
         <module>jdk8-completable-future</module>
         <module>reactive-programming</module>
+        <module>tests</module>
+        <module>encrypt</module>
+        <module>regex-test</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -34,6 +37,11 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
     </dependencies>
 
