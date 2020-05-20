@@ -18,6 +18,9 @@
         <module>tests</module>
         <module>encrypt</module>
         <module>regex-test</module>
+        <module>instrumentation</module>
+        <module>generator</module>
+        <module>mybatis</module>
     </modules>
     <packaging>pom</packaging>
 
