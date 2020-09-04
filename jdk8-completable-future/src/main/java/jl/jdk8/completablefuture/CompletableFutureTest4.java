@@ -23,6 +23,9 @@ public class CompletableFutureTest4 {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> "hello world");
         CompletableFuture<String> future2 = future.thenApply(element -> element + " addOnePart")
+                .thenApply(ele -> {
+                    throw new RuntimeException();
+                })
                 .thenApply(element -> element + " addTwoPart");
         System.out.println(future2.get());
     }
