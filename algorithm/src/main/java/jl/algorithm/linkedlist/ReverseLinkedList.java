@@ -3,6 +3,7 @@ package jl.algorithm.linkedlist;
 import static jl.algorithm.linkedlist.LinkedNode.init;
 
 /**
+ * https://leetcode-cn.com/problems/reverse-linked-list/
  * PalindromeLinkedList
  * 单链表反转一般实现
  *
@@ -10,8 +11,6 @@ import static jl.algorithm.linkedlist.LinkedNode.init;
  * @date 2019-06-25
  */
 public class ReverseLinkedList {
-
-
 
     private static LinkedNode reverse1(LinkedNode head) {
         if (head != null && head.next != null) {
@@ -51,6 +50,25 @@ public class ReverseLinkedList {
         // 原head的next指向null，断开环
         p.next.next = null;
         return head;
+    }
+
+    /**
+     * 2021-03-15 重做
+     */
+    private static ListNode reverse3(ListNode head) {
+        ListNode curr = head;
+        ListNode pre = null;
+        ListNode temp = null;
+        while (curr != null && curr.next != null) {
+            temp = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = temp;
+        }
+        if (curr != null) {
+            curr.next = pre;
+        }
+        return curr;
     }
 
     public static void main(String[] args) {
