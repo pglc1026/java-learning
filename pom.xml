@@ -24,6 +24,13 @@
         <module>design-pattern</module>
         <module>map-struct</module>
         <module>clh-lock</module>
+        <module>java-object</module>
+        <module>jol</module>
+        <module>java-concurrency</module>
+        <module>lagou</module>
+        <module>sysio</module>
+        <module>jdk</module>
+        <module>spring-in-cycle</module>
     </modules>
     <packaging>pom</packaging>
 

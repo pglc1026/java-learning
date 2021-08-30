@@ -71,6 +71,23 @@ public class ReverseLinkedList {
         return curr;
     }
 
+    /**
+     * 2021-04-08 重做
+     */
+    public ListNode reverseList(ListNode head) {
+        ListNode curr = head;
+        ListNode pre = null;
+        ListNode next;
+        while (curr != null) {
+            next = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = next;
+        }
+
+        return pre;
+    }
+
     public static void main(String[] args) {
         // 方法1
         System.err.println("============== 方法1 ==============");

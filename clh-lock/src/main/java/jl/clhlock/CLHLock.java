@@ -57,12 +57,12 @@ public class CLHLock {
         predNode.set(preNode);
         // 对前置节点的locked状态进行自旋
         while (preNode.locked) {
-            try {
-                Thread.sleep(1000L);
-            } catch (InterruptedException e) {
-                // do nothing
-            }
-            System.out.println("线程" + Thread.currentThread().getName() + "未获取到锁，将进行自旋。");
+//            try {
+//                Thread.sleep(10L);
+//            } catch (InterruptedException e) {
+//                // do nothing
+//            }
+//            System.out.println("线程" + Thread.currentThread().getName() + "未获取到锁，将进行自旋。");
         }
 
         // 走到这里表示已经拿到锁了
