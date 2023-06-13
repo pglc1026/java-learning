@@ -13,7 +13,6 @@
         <module>jvm</module>
         <module>zookeeper</module>
         <module>algorithm</module>
-        <module>jdk8-completable-future</module>
         <module>reactive-programming</module>
         <module>tests</module>
         <module>encrypt</module>
@@ -31,6 +30,8 @@
         <module>sysio</module>
         <module>jdk</module>
         <module>spring-in-cycle</module>
+        <module>easy-excel-demo</module>
+        <module>copilot-test</module>
     </modules>
     <packaging>pom</packaging>
 

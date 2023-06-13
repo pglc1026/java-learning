@@ -63,6 +63,8 @@ public class MyTest {
 
         // 组装SQL
         Select select = SelectUtils.buildSelectFromTableAndExpressions(new Table(TABLE_NAME), "ID");
+        // SELECT ID FROM TABLE_NAME
+        select.toString();
 //        System.out.println("1: " + select);
         // 组装条件 ((plainColumn1 IS NOT NULL AND plainColumn1 != '') AND (cipherColumn1 IS NULL OR cipherColumn1 = ''))
         //          OR ((plainColumn2 IS NOT NULL AND plainColumn2 != '') AND (cipherColumn2 IS NULL OR cipherColumn2 = ''))
@@ -81,12 +83,12 @@ public class MyTest {
             plainIsNotNullExp.setNot(true);
             plainIsNotNullExp.setLeftExpression(plainColExp);
             // 1.2 plainColumn1 != ''
-            NotEqualsTo plianNotEqualsTo = new NotEqualsTo();
-            plianNotEqualsTo.setLeftExpression(plainColExp);
-            plianNotEqualsTo.setRightExpression(new StringValue(""));
+            NotEqualsTo plainNotEqualsTo = new NotEqualsTo();
+            plainNotEqualsTo.setLeftExpression(plainColExp);
+            plainNotEqualsTo.setRightExpression(new StringValue(""));
             // 1.3 (...)
             Parenthesis plainParenthesis = new Parenthesis();
-            plainParenthesis.setExpression(new AndExpression(plainIsNotNullExp, plianNotEqualsTo));
+            plainParenthesis.setExpression(new AndExpression(plainIsNotNullExp, plainNotEqualsTo));
 
             // 2. (cipherColumn1 IS NULL OR cipherColumn1 = '')
             // 2.1.1 cipherColumn1
